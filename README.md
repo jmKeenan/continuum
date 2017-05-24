@@ -61,10 +61,10 @@ You can create migrations by running `alembic revision --autogenerate -m "migrat
 Then editing the new migration in alembic/versions
 
 Then to run migrations on staging, you can locally run this:
-`SK_FORCE_USE_ENVIRON=STAGING alembic upgrade head`
+`HELLO_FORCE_USE_ENVIRON=STAGING alembic upgrade head`
 
 And to run migrations on prod, you can locally run this:
-`SK_FORCE_USE_ENVIRON=PROD alembic upgrade head`
+`HELLO_FORCE_USE_ENVIRON=PROD alembic upgrade head`
 
 
 ## hello_settings.py
@@ -73,7 +73,7 @@ hello_settings.py looks for an env.json file in the root of backend which determ
 
 Ansible ensures that prod and staging having a different env.json file to allow them to work differently.
 
-If you would like to locally simulate the environment of staging or prod, you can set the environmental variable SK_FORCE_USE_ENVIRON
+If you would like to locally simulate the environment of staging or prod, you can set the environmental variable HELLO_FORCE_USE_ENVIRON
 
 This will cause hello_settings.py to look in a different location for env.json (see FORCE_ENVIRON in hello_settings.py to see how this works)
 
@@ -82,10 +82,10 @@ This will cause hello_settings.py to look in a different location for env.json (
 
 Deployment is configured by Ansible. All deployment code lives in `backend/devops` folder.
 
-There is a staging deployment accessible by `https://test.successkit.io` and `https://blue.successkit.io` 
-The production deployment is accessible by all other subdomains of successkit.io
+There is a staging deployment accessible by `https://staging.continuum-partners.com` 
+and prod deployment accessible by `https://continuum-partners.com` 
 
-Staging and production run on independent AWS machines and have independent database connections.
+Staging and production run on independent EC2 machines and have independent databases.
 
 Which database connection is configured by env.json &mdash; this file is stored outside of git so that it can be configured differently on different machines. 
 
