@@ -2,15 +2,6 @@
   - name: ensure log directory
     action: file dest={{log_dir}} state=directory
 
-  - name: make ssl directory
-    action: file dest=/etc/nginx/ssl state=directory
-
-  - name: copy ssl key and cert
-    action: copy src={{item.from}} dest={{item.to}}
-    with_items:
-      - { from: '{{nginx_crt}}', to: '/etc/nginx/ssl/nginx.crt' }
-      - { from: '{{nginx_key}}', to: '/etc/nginx/ssl/nginx.key' }
-
   - name: ensure uwsgi_log directory
     action: file dest={{uwsgi_log_dir}} state=directory
 
