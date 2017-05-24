@@ -13,7 +13,7 @@ export default class RequireAuthenticationContainer extends React.Component {
   }
 
   componentWillMount() {
-    const sessionToken = window.localStorage.getItem('continuum_session_token')
+    const sessionToken = window.localStorage.getItem('cpi_session_token')
 
     if (!sessionToken) {
       browserHistory.push({

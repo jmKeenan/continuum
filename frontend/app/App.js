@@ -35,7 +35,7 @@ class Container extends Component {
   }
 
   logout() {
-    window.localStorage.removeItem('continuum_session_token')
+    window.localStorage.removeItem('cpi_session_token')
     browserHistory.push('/login')
   }
 

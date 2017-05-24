@@ -1,5 +1,5 @@
 app_name: hello_webapp
-repo_url: git@github.com:jmKeenan/continuum.git
+repo_url: git@github.com:jmKeenan/cpi.git
 repo_remote: origin
 src_dir: /srv/hello_webapp
 srv_dir: /srv
@@ -10,5 +10,5 @@ public_dir: /srv/public/
 aws_key_name: continuum
 aws_security_group: webapp-security-group
 aws_instance_name: aws_default
-aws_key_location: /Users/maxfowler/computer/freelance/continuum/backend/devops/secret_files/continuum.pem
+aws_key_location: /Users/maxfowler/computer/freelance/cpi/backend/devops/secret_files/continuum.pem
 aws_subnet: subnet-c05bdb88

@@ -2,7 +2,7 @@ import { browserHistory } from 'react-router'
 import Raven from 'raven-js'
 
 function redirectToLogin() {
-  window.localStorage.removeItem('continuum_session_token')
+  window.localStorage.removeItem('cpi_session_token')
   browserHistory.push({
     pathname: '/login',
     state: {
@@ -12,7 +12,7 @@ function redirectToLogin() {
 }
 
 function get(endpoint, cb = data => data, onErr = Raven.captureException.bind(Raven)) {
-  const sessionToken = window.localStorage.getItem('continuum_session_token')
+  const sessionToken = window.localStorage.getItem('cpi_session_token')
 
   return fetch(endpoint, {
     headers: new window.Headers({
@@ -39,7 +39,7 @@ function get(endpoint, cb = data => data, onErr = Raven.captureException.bind(Ra
 }
 
 function post(endpoint, data = {}, cb = data => data, onErr = Raven.captureException.bind(Raven)) {
-  const sessionToken = window.localStorage.getItem('continuum_session_token')
+  const sessionToken = window.localStorage.getItem('cpi_session_token')
 
   return fetch(endpoint, {
     headers: new window.Headers({
@@ -86,7 +86,7 @@ export default {
     }
     return post('/api/auth/', data).then((data) => {
       if (data.success) {
-        window.localStorage.setItem('continuum_session_token', data.token)
+        window.localStorage.setItem('cpi_session_token', data.token)
         return cb()
       }
       else {

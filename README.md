@@ -4,7 +4,7 @@
 
 1. `cd backend`
 2. `pip install -r requirements.txt`
-3. `ln -s <path_to_continuum_secrets> devops/secret_files`
+3. `ln -s <path_to_cpi_secrets> devops/secret_files`
 4. `ln -s devops/secret_files/local_env.json env.json`
 
 ## frontend setup
@@ -82,8 +82,8 @@ This will cause hello_settings.py to look in a different location for env.json (
 
 Deployment is configured by Ansible. All deployment code lives in `backend/devops` folder.
 
-There is a staging deployment accessible by `https://staging.continuum-partners.com` 
-and prod deployment accessible by `https://continuum-partners.com` 
+There is a staging deployment accessible by `https://staging.cpi-partners.com` 
+and prod deployment accessible by `https://cpi-partners.com` 
 
 Staging and production run on independent EC2 machines and have independent databases.
 

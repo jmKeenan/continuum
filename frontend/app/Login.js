@@ -36,7 +36,7 @@ export default class Login extends React.Component {
   componentDidMount() {
     if (this.props.location.state && this.props.location.state.unauthorized) {
       this.context.notify({
-        message: 'Please log in to access the Continuum admin tools.',
+        message: 'Please log in to access the Continuity Partners admin tools.',
         level: 'warning',
         autoDismiss: 3
       })
