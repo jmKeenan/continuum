@@ -1,9 +1,5 @@
-devops/secret_files*
-.idea*
-*.pyc
-hello_webapp.ini
-devops/hosts
-env.json
-devops/secret_files
-vir_successkit/
-tmp*
+node_modules/
+build/
+*.DS_Store
+*.swp
+run.sh
