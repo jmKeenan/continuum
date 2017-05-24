@@ -13,7 +13,7 @@
         instance_type: t2.micro
         image: ami-fce3c696
         wait: yes
-#        group: "{{aws_security_group}}"
+        group: "{{aws_security_group}}"
         count: 1
         vpc_subnet_id: "{{aws_subnet}}"
         assign_public_ip: yes
