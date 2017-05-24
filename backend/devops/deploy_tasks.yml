@@ -35,7 +35,13 @@
     copy: src=secret_files/ dest={{backend_dir}}/devops/secret_files/
 
   - name: copy over frontend assets to public_dir
-    action: copy src={{frontend_dir}} dest={{public_dir}}
+    action: copy src={{item.from}} dest={{item.to}}
+    with_items:
+      - { from: '../../frontend/index.html', to: '{{public_dir}}' }
+      - { from: '../../frontend/main.js', to: '{{public_dir}}' }
+      - { from: '../../frontend/build/{{frontend_build_dir}}/', to: '{{public_dir}}/build/' }
+    tags:
+      quick
 
   - name: make srv_dir writeable by webgroup
     action: file path={{srv_dir}} mode=u=rwX,g=rwX,o=X recurse=yes group=webgroup
