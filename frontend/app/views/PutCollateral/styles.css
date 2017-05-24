@@ -1,0 +1,266 @@
+@keyframes loadIn {
+  0% {
+    opacity: .5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.view {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+  animation-name: loadIn;
+  animation-iteration-count: 1;
+  animation-timing-function: ease;
+  animation-duration: 0.3s;
+}
+
+.viewWrapper{
+  composes: viewWrapper from 'sharedStyles/styles.css';
+}
+
+.pageHeading{
+  width: 100%;
+  text-align: center;
+  composes: h2 from 'sharedStyles/styles.css';
+}
+
+.dashButtonSection{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  padding: 1em;
+  max-width: 800px;
+}
+
+.back{
+  width: 100%;
+  color: silver;
+  text-align: center;
+}
+
+.formWrapper{
+  composes: formWrapper from 'sharedStyles/styles.css';
+}
+
+.inputWrapperHalf{
+  width: 50%;
+  position: relative; /*this is the parent container for the error message that appears below form. needs to be relative.*/
+  padding: 1em;
+}
+
+.inputWrapperFull{
+  width: 100%;
+  position: relative;
+  box-sizing:border-box;
+  padding: 1em;
+}
+
+.section{
+  width: 100%;
+  display: flex;
+}
+
+.checkboxSection{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing:border-box;
+}
+
+.checkboxBlock{
+  margin-top: .4em;
+  width: 50%;
+  /* border: 1px solid #E0E0E0; */
+  border-radius: 5px;
+  margin-bottom: 1em;
+}
+
+.checkboxWrapper{
+  margin: 1em;
+}
+
+.dashButtonWrapper{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttonWrapper{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.on{
+  transition: .2s;
+  background-color: #5b5b82;
+  border: 1px solid #5b5b82;
+  color: white;
+}
+
+.off{
+  background-color: white;
+  border: 1px solid #5b5b82;
+  color: #5b5b82
+}
+
+.sectionHeader{
+  margin-top: 1em;
+  padding-left: 1rem;
+}
+
+.selectionButton{
+  composes: h3 noTextSelection from 'sharedStyles/styles.css';
+  width: 100%;
+  height: 6rem;
+  outline: none;
+  border-radius: 5px;
+  margin: 1em;
+  font-weight: 600;
+}
+
+.selectionButton:hover{
+  opacity: .7;
+  cursor: pointer;
+}
+
+.radioButton{
+  composes: h3 from 'sharedStyles/styles.css';
+  width: 1.6rem;
+  height: 1.6rem;
+  outline: none;
+  margin-right: 1rem;
+  padding: 0;
+  border-radius: 99px;
+  font-size: .7rem;
+  background: url('/public/checkmark.svg') no-repeat scroll 3px 3px transparent;
+  background-size: 1.1rem 1.1rem;
+}
+
+.radioButton:hover{
+  opacity: .7;
+  cursor: pointer;
+}
+
+.radioButtonOn{
+  transition: .2s;
+  background-color: #5b5b82;
+  border: 1px solid #5b5b82;
+  color: white;
+
+}
+
+.radioButtonOff{
+  background-color: white;
+  border: 1px solid #5b5b82;
+  color: white;
+}
+
+.tagSelectionWrapper{
+  padding: 1rem;
+      padding-top: 0px;
+}
+
+.submitButton:hover{
+  cursor: pointer;
+  transition: .2s;
+  background-color: #474766;
+}
+
+.submitButton{
+  float: right;
+  transition: .2s;
+  font-size: 16px;
+  padding: 1em;
+  border-radius: 5px;
+  border: none;
+  width: 12em;
+  height: 3em;
+  font-weight: 600;
+  color: white;
+  background-color: #5b5b82;
+  outline: none;
+}
+
+.submitButton:focus{
+  outline: none;
+  background-color: #2D2C3F;
+  transition: .01s;
+}
+
+.submitButtonError{
+  float: right;
+  font-size: 16px;
+  padding: 1em;
+  border-radius: 5px;
+  border: none;
+  width: 12em;
+  height: 3em;
+  font-weight: 600;
+  composes: whiteText from 'sharedStyles/color.css';
+
+  background-color: #EB7150;
+  transition: .2s;
+  outline: none;
+}
+
+.submitButtonError:focus{
+  background-color: #EB7150;
+  outline: none;
+}
+
+.submitButtonError:hover{
+  background-color: #EB7150;
+  outline: none;
+}
+
+.buttonSubmitInProgress{
+  float: right;
+  font-size: 16px;
+  padding: 1em;
+  border-radius: 5px;
+  border: none;
+  width: 12em;
+  height: 3em;
+  font-weight: 600;
+  composes: whiteText from 'sharedStyles/color.css';
+
+  background-color: #357EDD;
+  transition: .2s;
+  outline: none;
+}
+
+.buttonSubmitInProgress:focus{
+  background-color: #357EDD;
+  outline: none;
+}
+
+.buttonSubmitInProgress:hover{
+  background-color: #357EDD;
+  outline: none;
+}
+
+.checkboxWrapper {
+  composes: noTextSelection from 'sharedStyles/styles.css';
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.checkboxWrapper:hover{
+  opacity: .7;
+  cursor: pointer;
+}

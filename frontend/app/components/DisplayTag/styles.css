@@ -1,0 +1,46 @@
+.tag{
+  background-color: #5b5b82;
+  height: 20px;
+  /*background-color: grey;*/
+  color: white;
+  padding: .5rem;
+  padding-left: .75rem;
+  padding-right: .75rem;
+  margin-right: .25rem;
+  margin-bottom: .25rem;
+  border-radius: 2px;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: none;
+  overflow: hidden;
+  text-align: center;
+  vertical-align: center;
+  user-select: none;
+}
+
+
+.unmatched{
+  background-color: #acacc7;
+  height: 20px;
+  /*background-color: grey;*/
+  color: white;
+  padding: .5rem;
+  padding-left: .75rem;
+  padding-right: .75rem;
+  margin-right: .25rem;
+  margin-bottom: .25rem;
+  border-radius: 2px;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: none;
+  overflow: hidden;
+  text-align: center;
+  vertical-align: center;
+  user-select: none;
+}

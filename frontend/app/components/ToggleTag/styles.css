@@ -1,0 +1,81 @@
+.inactive{
+  background-color: white;
+  border: 1px solid transparent;
+  color: #5b5b82;
+  opacity: .6;
+  cursor: pointer;
+}
+
+.active{
+  background-color: #5b5b82;
+  border: 1px solid transparent;
+  color: white;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.inactive.tag:hover{
+  /*transition: all 0.1s ease;*/
+  background-color: #fff;
+  border: 1px solid #43435f;
+  color: #43435f;
+}
+
+.active.tag:hover{
+  /*transition: all 0.1s ease;*/
+  background-color: #43435f;
+  border: 1px solid transparent;
+  color: white;
+}
+
+.tag{
+  padding: .5rem;
+  padding-left: .75rem;
+  padding-right: .75rem;
+  margin-bottom: .25rem;
+  margin-right: .25rem;
+  border-radius: 2px;
+  font-size: 14px;
+  font-weight: bolder;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: none;
+  overflow: hidden;
+  text-align: center;
+  vertical-align: center;
+  user-select: none;
+}
+
+.open{
+  width: auto;
+  visibility: visible;
+  opacity: 1;
+}
+
+.closed.inactive{
+  width: 0px;
+  height: 0px;
+  padding: 0px;
+  margin: 0px;
+  border: none;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.closed.active{
+  display: inherit;
+  visibility: visible;
+  opacity: 1;
+  cursor: default;
+}
+
+.x{
+  opacity: .6;
+  cursor: pointer;
+  margin-left: .5rem;
+}
+
+.addCollateral{
+  border: 1px solid #72729c;
+}

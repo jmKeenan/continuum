@@ -1,0 +1,40 @@
+.categoryWrapper {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.categoryHeader{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.categoryHeader:hover{
+  opacity: .6;
+}
+
+.categoryHeader p{
+  margin: 0px;
+  font-weight: 600;
+}
+
+.open{
+  height: auto;
+}
+
+.categoryWrapper ul{
+  overflow: hidden;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding-bottom: .5rem;
+}
+
+.arrow{
+  font-size: 10px;
+  vertical-align: 2px;
+  padding-right: 5px;
+}

@@ -1,0 +1,154 @@
+.feedWrapper {
+  border: 1px solid #f1f1f1;
+  overflow: hidden;
+  border-radius: 10px;
+  margin-bottom: 3rem;
+}
+
+.feedTitles{
+  color: #BDBDBD;
+  padding-top: 1.25rem;
+  padding-bottom: 1rem;
+}
+
+ul{
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+.feedWrapper li {
+  background: white;
+  display: flex;
+}
+
+.feedWrapper li a{
+  box-sizing: border-box;
+  padding: 1.5rem;
+  display: flex;
+  width: 100%;
+  text-decoration: none;
+  color: black;
+  align-items: center;
+}
+
+.feedWrapper li:nth-child(even) {
+  background-color: #f1f1f1;
+}
+
+.feedWrapper li:first-child{
+  padding-left: 1.5em;
+  padding-right: 2em;
+}
+
+.feedWrapper li:first-child:hover{
+  background-color: white;
+  cursor: inherit;
+}
+
+.feedWrapper li:hover{
+  background-color: #d1d1d1;
+  cursor: pointer;
+}
+.feedWrapper li div{
+  /*flex: 1;*/
+}
+
+.loadMore{
+  background-color: white;
+  border-top: 1px solid #f1f1f1;
+  padding: 2em;
+  color: lightgrey;
+}
+
+.loadMore:hover{
+  background-color: lightgrey;
+  cursor: pointer;
+  color: darkgrey;
+}
+
+.loadMore div{
+  text-align: center;
+  /*color: white;*/
+  width: 100%;
+}
+
+.loadNone{
+  background-color: white;
+  border-top: 1px solid #f1f1f1;
+  padding: 2em;
+}
+
+.loadNone div{
+  text-align: center;
+  color: #BDBDBD;
+  width: 100%;
+}
+
+.loadNone:hover{
+
+}
+
+.feedWrapper .tagView{
+  height: 40px;
+  display: flex;
+  /*width: 100%;*/
+  align-items: left;
+  justify-content: left;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex-basis: content;
+}
+
+.feedWrapper .tag{
+  /*flex: 1;*/
+  height: 20px;
+  background-color: #5b5b82;
+  color: white;
+  padding: .5rem;
+  padding-left: .75rem;
+  padding-right: .75rem;
+  margin-left: .25rem;
+  border-radius: 2px;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: none;
+  overflow: hidden;
+  text-align: center;
+  vertical-align: center;
+}
+
+.new{
+  font-weight: 600;
+  color: lightgreen;
+}
+
+.name{
+  font-weight: 600;
+}
+
+.col{
+  flex-grow: 1;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 2rem;
+}
+
+.row .col:last-child{
+  width: 30%;
+}
+.row .col:first-child{
+  width: 15%;
+  max-width: 120px;
+}
+.row .col:nth-child(2){
+  width: 30%;
+}
+.row .col:nth-child(3){
+  width: 20%;
+  max-width: 160px;
+}

@@ -1,0 +1,62 @@
+button a{
+  color: white;
+  text-decoration: none;
+}
+
+
+.large{
+  composes: h3 from 'sharedStyles/styles.css';
+  width: 14rem;
+  height: 6rem;
+  background-color: #5b5b82;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin: 1em;
+  font-weight: 600;
+  -webkit-box-shadow: 4px 4px 45px -11px rgba(0,0,0,0.4);
+  -moz-box-shadow: 4px 4px 45px -11px rgba(0,0,0,0.4);
+  box-shadow: 4px 4px 45px -11px rgba(0,0,0,0.4);
+}
+
+.large:hover{
+  opacity: .7;
+  cursor: pointer;
+}
+
+.medium{
+  width: 4rem;
+  height: 3rem;
+  background-color: blue;
+}
+
+.small{
+  width: 2rem;
+  height: 1.5rem;
+  background-color: red;
+}
+
+.default{
+  width: 2rem;
+  height: 1.5rem;
+  background-color: red;
+}
+
+.purpleBG{
+  composes: purpleMedium from 'sharedStyles/color.css';
+}
+
+.outline_purple{
+  border: 1px solid #5b5b82;
+  background-color: white;
+}
+
+.outline_error{
+  border: 1px solid #5b5b82;
+  background-color: white;
+}
+
+.bistableLarge{
+  composes: large outline_purple;
+  color: #5b5b82;
+}

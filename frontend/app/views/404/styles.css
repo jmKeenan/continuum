@@ -1,0 +1,30 @@
+/*.app {
+  min-height: 100vh;
+  min-width: 100vw;
+  overflow-y: hidden;
+  }*/
+.fourLight{
+  width: 100%;
+  font-size: 32px;
+  /*color: white;*/
+  text-align: center;
+}
+
+.fourDark{
+  width: 100%;
+  font-size: 32px;
+  color: white;
+  text-align: center;
+}
+
+.fourDark .backHome{
+  width: 100%;
+  font-size: 16px;
+  color: white;
+}
+
+.fourLight .backHome{
+  width: 100%;
+  font-size: 16px;
+  /*color: white;*/
+}

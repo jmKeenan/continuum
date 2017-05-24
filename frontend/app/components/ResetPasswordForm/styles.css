@@ -1,0 +1,64 @@
+.signinCard{
+composes: signInCard from 'sharedStyles/styles.css';
+}
+
+.loginButton{
+  composes: loginButton from 'sharedStyles/styles.css';
+}
+
+.loginButtonError{
+  composes: loginButtonError from 'sharedStyles/styles.css';
+}
+
+.loginInputTitle{
+  margin-bottom: 1em;
+  margin-top: .5em;
+}
+
+.loginInputHover:hover{
+  border: 1px solid silver;
+  transition: .2s;
+}
+
+.loginInputSelection:focus{
+  outline: none;
+  border: 1px solid #5b5b82;
+}
+
+.inputWrapperFull{
+  composes: inputWrapperFull from 'sharedStyles/styles.css';
+}
+
+.loginInput{
+  flex: 0 0 100%;
+  margin-bottom: 1em;
+  padding: .75em;
+  border: 1px solid #E0E0E0;
+  border-radius: 5px;
+  composes: loginInputHover loginInputSelection;
+  composes: black from 'sharedStyles/color.css';
+  font-size: 16px;
+}
+
+.loginInputWrapper{
+  height: auto;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-direction: column;
+  composes: h3 from 'sharedStyles/styles.css';
+  composes: darkGrey from 'sharedStyles/color.css';
+}
+
+.forgotPassword{
+  padding-top: 1em;
+  padding-bottom: .5em;
+  color: silver;
+  composes: text from 'sharedStyles/styles.css';
+}
+
+.passwordRequirements{
+  font-size: 14px;
+  color: grey;
+  margin-bottom: 1em;
+}

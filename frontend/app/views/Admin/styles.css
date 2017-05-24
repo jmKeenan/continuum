@@ -1,0 +1,95 @@
+.view {
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.viewWrapper{
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.pageHeading{
+  width: 100%;
+  text-align: center;
+  composes: h2 from 'sharedStyles/styles.css';
+}
+
+.dashButtonWrapper{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.categories{
+  flex: 1;
+  width: 50%;
+  margin: 3rem;
+}
+
+.categoryElement{
+  display: flex;
+  border: 1px solid #E0E0E0;
+  border-radius: 5px;
+  margin-bottom: 1em;
+  padding: .5rem;
+}
+
+.categoryName{
+  padding-left: .2rem;
+  flex: 1;
+}
+
+.number{
+  color: lightgrey;
+}
+
+.edit{
+  padding-right: .2rem;
+  flex-direction: row-reverse;
+  color: #474766;
+}
+
+.edit:hover{
+  color: #2D2C3F;
+}
+
+.edit:visited{
+  flex-direction: row-reverse;
+  color: #474766;
+}
+
+.team{
+  flex: 1;
+  width: 50%;
+  margin: 3rem;
+}
+
+.header{
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+}
+
+.createNew{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  composes: brandPrimaryText from 'sharedStyles/color.css';
+  text-decoration: underline;
+}
+
+.createNew:hover{
+  opacity: .7;
+}

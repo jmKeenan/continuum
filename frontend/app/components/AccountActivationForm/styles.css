@@ -1,0 +1,187 @@
+.signinCard{
+  max-width: 28rem;
+  width: 100%;
+  height: auto;
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  position: relative;
+
+  padding: 1em;
+  /*padding-bottom: 1rem;*/
+
+  background-color: white;
+  border-radius: 10px;
+
+  -webkit-box-shadow: 4px 4px 45px -11px rgba(0,0,0,0.8);
+  -moz-box-shadow: 4px 4px 45px -11px rgba(0,0,0,0.8);
+  box-shadow: 4px 4px 45px -11px rgba(0,0,0,0.8);
+
+  transition: 1s;
+}
+
+.loginInputWrapper{
+}
+
+.noOpacity{
+  position: relative;
+  opacity:0;
+  transition: height .5s, opacity .3s;
+  height: 280px;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-direction: column;
+  composes: h3 from 'sharedStyles/styles.css';
+  composes: darkGrey from 'sharedStyles/color.css';
+}
+
+.opacity{
+  position: relative;
+  height: 448px;
+  transition: height .5s, opacity .3s;
+  opacity:1;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-direction: column;
+  composes: h3 from 'sharedStyles/styles.css';
+  composes: darkGrey from 'sharedStyles/color.css';
+}
+
+@keyframes checkmarkOn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1.0;
+  }
+}
+
+.checkmarkContainer{
+  opacity: 0;
+  margin-left: -1em;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  color: black;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: absolute;
+}
+
+.checkmarkOn{
+  animation: checkmarkOn .5s;
+  animation-delay: 600ms;
+  animation-fill-mode: forwards;
+}
+
+.successCheckmark{
+  background: url('/public/successCheckmark.svg') no-repeat;
+  background-size: 200px 200px;
+  height: 200px;
+  width: 200px;
+  display: block;
+  margin-bottom: 2rem;
+}
+
+.loginButton:hover{
+  cursor: pointer;
+  transition: .2s;
+  background-color: #474766;
+}
+
+.textColorWhite{
+  color:white;
+}
+
+.loginButton{
+  transition: .2s;
+  font-size: 16px;
+  padding: 1em;
+  border-radius: 5px;
+  border: none;
+  width: 100%;
+  font-weight: 600;
+  /*margin-top: .75em;*/
+  color: white;
+  background-color: #5b5b82;
+  outline: none;
+}
+
+.loginButton:focus{
+  outline: none;
+  background-color: #2D2C3F;
+  transition: .01s;
+}
+
+.loginInputTitle{
+  margin-bottom: 1em;
+  margin-top: .5em;
+}
+
+.loginInputHover:hover{
+  border: 1px solid silver;
+  transition: .2s;
+}
+
+.loginInputSelection:focus{
+  outline: none;
+  border: 1px solid #5b5b82;
+}
+
+
+.loginButtonError{
+  font-size: 16px;
+  padding: 1em;
+  border-radius: 5px;
+  border: none;
+  width: 100%;
+  font-weight: 600;
+  composes: whiteText from 'sharedStyles/color.css';
+
+  background-color: #EB7150;
+  transition: .2s;
+}
+
+.loginButtonError:focus{
+  background-color: #EB7150;
+  outline: none;
+}
+
+.loginButtonError:hover{
+  background-color: #EB7150;
+  outline: none;
+}
+
+.inputWrapperFull{
+  composes: inputWrapperFull from 'sharedStyles/styles.css';
+}
+
+.loginInput{
+  flex: 0 0 100%;
+  margin-bottom: 1em;
+  padding: .75em;
+  border: 1px solid #E0E0E0;
+  border-radius: 5px;
+  composes: loginInputHover loginInputSelection;
+  composes: black from 'sharedStyles/color.css';
+  font-size: 16px;
+}
+
+
+.forgotPassword{
+  padding-top: 1em;
+  padding-bottom: .5em;
+  color: silver;
+  composes: text from 'sharedStyles/styles.css';
+}
+
+.passwordRequirements{
+  font-size: 14px;
+  color: grey;
+  margin-bottom: 1em;
+}

@@ -1,0 +1,115 @@
+
+
+/* ====================================================================================
+Brand Text Colors
+=======================================================================================
+*/
+
+.whiteText{
+  color: white;
+}
+
+.brandPrimaryText{
+  color: #2d2c3f;
+}
+
+.brandSecondaryText{
+  color: #82bf78;
+}
+
+/* ====================================================================================
+Brand Background Colors
+=======================================================================================
+*/
+
+.brandPrimaryBackground{
+  background-color: #474766;
+}
+
+.brandPrimaryBackground_light{
+  background-color: #2D2C3F;
+}
+
+.brandSecondaryBackground{
+  background-color: #82bf78;
+}
+
+.brandSecondaryBackground_light{
+  background-color: #8ebc85;
+}
+
+/* ====================================================================================
+Other Text Colors
+=======================================================================================
+*/
+
+.purpleDark{
+  color: #474766;
+}
+
+.purpleMedium{
+  background-color: #5b5b82;
+}
+
+.black{
+  color: black;
+}
+
+.darkGrey{
+  color: rgba(0,0,0,.9);
+}
+
+.red{
+  color:red;
+}
+
+.warningText{
+  color: #EB7150;
+}
+
+.warningText:hover{
+  color: #e85933;
+}
+
+
+/* ====================================================================================
+Other Background Colors
+=======================================================================================
+*/
+
+.confirmBackground{
+  background-color: #82bf78;
+}
+
+.errorBackground{
+  background-color: #EB7150;
+}
+
+.errorBackgroundHover{
+  background-color: #e85933;
+}
+
+.warningBackground{
+  background-color: #ffea7f;
+}
+
+.darkPurpleHoverBackground{
+  background-color: #474766;
+}
+
+.darkPurpleHoverBackground{
+  background-color: #2D2C3F;
+
+}
+
+.pendingBackground{
+  background-color: #357EDD;
+}
+
+.sub{
+  opacity: .7;
+}
+
+.lighterGreyBG{
+  background-color: #f1f1f1;
+}

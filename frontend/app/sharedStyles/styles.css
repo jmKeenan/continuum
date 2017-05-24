@@ -1,0 +1,165 @@
+@font-face {
+  font-family: 'Open Sans';
+  src: url('/public/OpenSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('/public/OpenSans-Semibold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+html, body {
+  margin: 0px;
+  padding: 0px;
+  height: 100vh;
+  width: 100vw;
+  min-height: 100vh;
+  font-family: 'Open Sans',sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.homeContainer {
+  padding: 20px;
+}
+
+.h1{
+  font-size: 50px;
+}
+
+.h2{
+  font-size: 24px;
+}
+
+.h3{
+  font-size: 16px;
+}
+
+h3{
+  margin: 0;
+}
+
+.p{
+  /*font-size: 14px;*/
+}
+
+.center {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.noTextSelection {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/*centers form views*/
+.viewWrapper{
+  width: 90%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+/*sets max width and document flow for forms – highest level form element including buttons on standard single column forms*/
+.formWrapper{
+  width: 100%;
+  max-width: 800px;
+  display: block;
+}
+
+.inputWrapperFull{
+  width: 100%;
+  margin-bottom: 1em;
+  position: relative;
+  box-sizing:border-box;
+}
+
+.inputWrapperHalf{
+  width: 50%;
+  margin-bottom: 1em;
+  position: relative;
+  box-sizing:border-box;
+}
+
+/* ====================================================================================
+Login Button Styles
+=======================================================================================
+*/
+
+.signInCard{
+  max-width: 28rem;
+  width: 80%;
+  height: auto;
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  padding: 1.4em;
+
+  background-color: white;
+  border-radius: 10px;
+
+  -webkit-box-shadow: 4px 4px 45px -11px rgba(0,0,0,0.8);
+  -moz-box-shadow: 4px 4px 45px -11px rgba(0,0,0,0.8);
+  box-shadow: 4px 4px 45px -11px rgba(0,0,0,0.8);
+}
+
+.loginButton{
+  transition: .2s;
+  font-size: 16px;
+  padding: 1em;
+  border-radius: 5px;
+  border: none;
+  width: 100%;
+  font-weight: 600;
+  /*margin-top: .75em;*/
+  color: white;
+  composes: whiteText brandPrimaryBackground from 'sharedStyles/color.css';
+  outline: none;
+}
+
+.loginButton:hover{
+  outline: none;
+  background-color: #2D2C3F;
+  cursor: pointer;
+  transition: .1s;
+}
+
+.loginButtonError{
+  font-size: 16px;
+  padding: 1em;
+  border-radius: 5px;
+  border: none;
+  width: 100%;
+  font-weight: 600;
+  composes: whiteText errorBackground from 'sharedStyles/color.css';
+  transition: .2s;
+}
+
+.loginButtonError:focus{
+  outline: none;
+}
+
+/* not small */
+@media screen and (min-width: 30em){
+
+}
+
+/* not medium */
+@media screen and (min-width: 30em) and (max-width: 60em){
+
+}
+
+/* not large */
+@media screen and (min-width: 60em){
+
+}

@@ -1,0 +1,118 @@
+.box{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: inherit;
+  background-color: rgba(0,0,0,.5);
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.boxHidden{
+  position: fixed;
+  margin: auto;
+  top: 0;
+  left: 0;
+  width: 0px;
+  height: 0px;
+  display: none;
+  background-color: rgba(0,0,0,.5)
+}
+
+.modal{
+  transform: translateY(-46px);
+  background-color: white;
+  /*border: 2px solid #EB7150;*/
+  border-radius: .5rem;
+  width: 500px;
+  box-sizing: border-box;
+
+}
+
+.content{
+  height: auto;
+}
+
+.lightDismiss{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: inherit;
+}
+
+.close{
+  opacity: .8;
+  cursor: pointer;
+  float: right;
+  padding-right: 1rem;
+  padding-top: .75rem;
+  /*margin-left: .5rem;*/
+}
+
+.toDelete{
+  font-weight: bold;
+}
+
+.check1{
+  padding-left: 2rem;
+  padding-right: 2rem;
+  font-size: 16px;
+  padding-top: 1.5rem;
+  font-weight: 600;
+}
+
+.lightCheck1{
+  padding-left: 2rem;
+  padding-right: 2rem;
+  font-size: 16px;
+  padding-top: 1.5rem;
+  margin-bottom: 2rem;
+  font-weight: 600;
+}
+
+.check2{
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 1rem;
+  background-color: #ffea7f;
+  border-color: rgba(176,136,0,0.3);
+  color: #735c0f;
+  margin-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.check3{
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 1rem;
+}
+
+.modal form{
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.modal form div{
+  padding-top: 1rem;
+}
+
+.buttonWrapper{
+  padding-left: 2rem;
+  padding-right: 2rem;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
+}
+
+.rightFix{
+  /*padding-right: 2rem;*/
+}
