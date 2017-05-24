@@ -1,14 +1,36 @@
 import unittest
 import json
-import random
 
 from flask import current_app
 
 from hello_models.database import init_db
-from hello_utilities.create_staging_data import create_staging_data
 from hello_settings import ENV_DICT
+from hello_utilities.create_user import create_user
+from hello_webapp.extensions import db
 
 TEST_TENANCY = 'test'
+
+def create_test_data():
+    """
+    deletes all data in database, and recreates test data
+    for the purpose of testing
+    """
+    if 'prod' in ENV_DICT['DB_CONNECTION']['database']:
+        raise Exception('++ cannot create test data in production database')
+
+    print '++ CURRENT DB_CONNECTION: {}'.format(ENV_DICT['DB_CONNECTION']['database'])
+    db.session.rollback()
+    require_confirmation = True
+    if require_confirmation:
+        choice = raw_input('Are you sure you want to delete all data in this database? Type confirm then enter to confirm: \n')
+        if not choice == 'confirm':
+            raise Exception('++ aborting')
+    print '++ deleting data in database and creating test data'
+    print '++ deleting users'
+    db.session.execute('delete from "users"')
+
+    # creating data
+    create_user('test@gmail.com', 'test')
 
 
 class FlaskrTestCase(unittest.TestCase):
@@ -40,7 +62,7 @@ class FlaskrTestCase(unittest.TestCase):
 
         # create test data
         print '++ creating test data'
-        create_staging_data(setting='TEST', require_confirmation=False)
+        create_test_data()
 
         # user login and save token to self.token
         rv = self.client.post('/api/auth/', data=json.dumps({
@@ -51,15 +73,6 @@ class FlaskrTestCase(unittest.TestCase):
         data = json.loads(rv.data)
         assert data['token'] is not None
         self.token = data['token']
-
-        # save categories and tags for this tenancy
-        rv = self.get_helper('/api/categories/')
-        data = json.loads(rv.data)
-        self.categories = data['categories']
-        self.tags = []
-        for category in self.categories:
-            self.tags.extend(category['tags'])
-        self.tag_ids = map(lambda t: t['tag_id'], self.tags)
 
     def put_helper(self, url, data):
         """
