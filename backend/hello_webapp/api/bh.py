@@ -4,6 +4,7 @@ from flask import request, jsonify, Blueprint
 
 from hello_utilities.bullhorn.bullhorn_api import BullhornApi
 from hello_utilities.auth_helper import authentication_required
+from hello_utilities.log_helper import _log, _capture_exception
 from hello_settings import TEMPLATE_DIR
 
 
@@ -55,6 +56,7 @@ def get_bh_blueprint():
         try:
             note_id = bapi.create_note(action=action, comments=comments, candidate_id=candidate_id)
             if note_id:
+                _log('++ created note: {}'.format(note_id))
                 to_return = {
                     'success': True,
                     'note_id': note_id,
@@ -64,7 +66,8 @@ def get_bh_blueprint():
                     'success': False,
                     'message': 'API error'
                 }
-        except:
+        except Exception as e:
+            _capture_exception(e)
             to_return = {
                     'success': False,
                     'message': 'API error'
