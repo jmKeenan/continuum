@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import API from './helpers/API'
+import Loader from 'react-loader'
+import Select from 'react-select'
+
 
 class NewNote extends Component {
   constructor(props) {
@@ -13,59 +16,160 @@ class NewNote extends Component {
 
   componentWillMount() {
     this.setState({
-      name: '',
+      name: 'Max',
       note: '',
-      action: '',
+      candidateOptions: [],
+      selectedAction: [],
+      selectedNames: [],
+      actions: [],
+      candidateId: null,
+      loaded: false,
     })
   }
 
-  onSubmit(ev) {
-    ev.preventDefault()
-    API.newNote(this.state, note => {
-      this.context.notify({
-        message: `Note created`,
-        level: 'success',
-        autoDismiss: 1,
-        onRemove: () => {
-          this.props.router.push(`/${note.id}`)
-        }
+  componentDidMount() {
+    this.getCommentActions()
+  }
+
+  getCommentActions = () => {
+    API.getCommentActions().then(actions => {
+      this.setState({
+        loaded: true,
+        actions: actions
       })
     })
   }
 
-  onInputChange(key, ev) {
+  searchCandidates = (input) => {
+    if (input) {
+      return API.searchCandidates({query: input}).then(data => {
+        const candidateOptions = data.map(c => ({value: c.entityId, label: c.title}))
+        return {
+          options: candidateOptions,
+          complete: false
+        }
+      })
+    }
+    else {
+      return {
+        options: []
+      }
+    }
+  }
+
+  onSubmit = (ev) => {
+    ev.preventDefault()
+    const noteArgs = {
+      comments: this.state.note,
+      action: this.state.selectedAction,
+      candidateId: this.state.selectedNames
+    }
+    API.newNote(noteArgs).then((response) => {
+      if (response.success) {
+        this.context.notify({
+          message: `Note created`,
+          level: 'success',
+          autoDismiss: 1,
+          onRemove: () => {
+            this.setState({
+              note: '',
+              selectedAction: [],
+              selectedNames: []
+            })
+          }
+        })
+      }
+      else {
+        this.context.notify({
+          message: `Failed to create note`,
+          level: 'error',
+          autoDismiss: 1,
+          onRemove: () => {
+            this.props.router.push(`/${note.id}`)
+          }
+        })
+      }
+    })
+  }
+
+  onInputChange= (key, ev) => {
     var update = {}
     update[key] = ev.target.value
     this.setState(update)
   }
 
-  render() {
-    return <div className="main-wrapper">
-      <form onSubmit={this.onSubmit}>
-        <fieldset>
-          <label>Name</label>
-          <input
-            type="text"
-            value={this.state.name}
-            onChange={this.onInputChange.bind(this, 'name')} />
-        </fieldset>
-        <fieldset>
-          <label>Note</label>
-          <textarea
-            value={this.state.note}
-            onChange={this.onInputChange.bind(this, 'note')}
-          />
-        </fieldset>
-        <fieldset>
-          <label>Action</label>
-          <input
-            type="text"
-            value={this.state.action}
-            onChange={this.onInputChange.bind(this, 'action')} />
-        </fieldset>
-        <input type="submit" value="Save" />
-      </form>
-    </div>
+  onNameChange = (val) => {
+    let selectedNames= this.state.selectedNames
+    if (Array.isArray(val)) {
+      selectedNames = val.map(v => v.value)
+    } else {
+      selectedNames = val.value
+    }
+    this.setState({
+      selectedNames: selectedNames
+    })
+  }
+
+  onActionChange = (val) => {
+    let selectedAction = this.state.selectedAction
+    if (Array.isArray(val)) {
+      selectedAction = val.map(v => v.value)
+    } else {
+      selectedAction = val.value
+    }
+    this.setState({
+      selectedAction: selectedAction
+    })
+  }
+
+  getNameOptions = (input) => {
+    return this.searchCandidates(input)
+  }
+
+  render = () => {
+
+    const actionOptions = this.state.actions.map(c => ({ value: c, label: c }))
+    const candidateOptions = this.state.candidateOptions
+
+    return (
+      <Loader loaded={this.state.loaded}>
+        <div className="main-wrapper">
+          <form onSubmit={this.onSubmit}>
+            <fieldset>
+              <label>Name</label>
+              <Select.Async
+                name="name"
+                placeholder="Name"
+                value={this.state.selectedNames}
+                onChange={this.onNameChange}
+                loadOptions={this.getNameOptions}
+                autoload={false}
+                clearable={false}
+              />
+            </fieldset>
+            <fieldset>
+              <label>Note</label>
+              <textarea
+                value={this.state.note}
+                onChange={this.onInputChange.bind(this, 'note')}
+              />
+            </fieldset>
+            <fieldset>
+              <label>Action</label>
+              <Select
+                name="action"
+                placeholder="Action"
+                value={this.state.selectedAction}
+                onChange={this.onActionChange}
+                options={actionOptions}
+                clearable={false}
+              />
+            </fieldset>
+            <input type="submit" value="Save" />
+          </form>
+        </div>
+      </Loader>
+    )
   }
 }
 

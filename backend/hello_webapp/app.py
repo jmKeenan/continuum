@@ -7,6 +7,7 @@ from hello_settings import BACKEND_PATH, TEMPLATE_DIR, ENV_DICT, get_db_url
 from hello_utilities.log_helper import _log, _capture_exception
 from hello_webapp.helper_routes import get_hello_helpers_blueprint
 from hello_webapp.api.auth import get_auth_blueprint
+from hello_webapp.api.bh import get_bh_blueprint
 from hello_webapp.flask_admin_routes import get_flask_admin
 from hello_webapp.extensions import db, basic_auth, sentry
 
@@ -43,6 +44,7 @@ def create_app():
     # register blueprints
     app.register_blueprint(get_hello_helpers_blueprint())
     app.register_blueprint(get_auth_blueprint())
+    app.register_blueprint(get_bh_blueprint())
 
     # configure sentry
     if ENV_DICT.get('SENTRY_DSN'):

@@ -1,5 +1,5 @@
 {
-  "name": "callparty",
+  "name": "cpi-search",
   "version": "0.0.0",
   "main": "main.js",
   "scripts": {
@@ -13,6 +13,7 @@
     "moment": "^2.17.1",
     "raven-js": "^3.10.0",
     "react": "^15.4.1",
+    "react-autosuggest": "^9.0.1",
     "react-dom": "^15.4.1",
     "react-hot-loader": "^3.0.0-beta.3",
     "react-loader": "^2.4.0",

@@ -73,9 +73,29 @@ export default {
     return get('/api/currentUser/').then(data => cb(data.currentUser))
   },
 
-  newNote: function(data) {
-    // TODO: implement this
-    return {}
+  newNote: function(params) {
+    /* example query:
+     * {
+     *  action: 'Left a message',
+     *  comments: 'this is the contents of the note',
+     *  candidate_id: 1343242
+     * }
+     */
+    return post('/api/note/', params).then(data => {
+      return data
+    })
+  },
+
+  searchCandidates: function(params) {
+    return post('/api/search/candidates/', params).then(data => {
+      return data.candidates
+    })
+  },
+
+  getCommentActions: function(params) {
+    return get('/api/comment-actions/', params).then(data => {
+      return data.actions
+    })
   },
 
   login: function(username, password, cb, onErr) {
