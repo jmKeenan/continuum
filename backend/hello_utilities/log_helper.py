@@ -1,3 +1,6 @@
+import traceback
+import sys
+
 from hello_utilities.slack_helper import slack_notify_message
 from hello_settings import ENV_DICT
 from hello_webapp.extensions import sentry
@@ -18,12 +21,17 @@ def _log(message, channel_name=None):
         slack_notify_message(message, channel_name=channel_name)
 
 
-def _capture_exception():
+def _capture_exception(e):
     """
     wrapper function which uses sentry to captureException if sentry is enabled in this environment
     :param e: exception to be captured
     :return: None
     """
+    # log exception to slack
+    exc_type, exc_value, exc_traceback = sys.exc_info()
+    formatted_lines = traceback.format_exc()
+    _log('@channel: error: {}'.format(e.message), channel_name='_error')
+    _log(formatted_lines, channel_name='_error')
     if ENV_DICT.get('SENTRY_DNS'):
         _log('++ trying to log error to sentry')
         sentry.captureException()

@@ -64,11 +64,7 @@ def create_app():
         """
         if a page throws an error, log the error to slack, and then re-raise the error
         """
-        # log exception to slack
-        exc_type, exc_value, exc_traceback = sys.exc_info()
-        formatted_lines = traceback.format_exc()
-        _log('@channel: error: {}'.format(e.message), channel_name='_error')
-        _log(formatted_lines, channel_name='_error')
+        _capture_exception(e)
         # re-raise error
         raise e
 
