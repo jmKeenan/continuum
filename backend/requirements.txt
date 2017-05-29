@@ -19,3 +19,4 @@ raven==6.0.0
 flask-cli==0.4.0
 enum==0.4.6
 google-api-python-client==1.6.2
+requests==2.14.2
