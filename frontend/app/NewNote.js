@@ -3,6 +3,9 @@ import API from './helpers/API'
 import Loader from 'react-loader'
 import Select from 'react-select'
 
+// this variable is used to allow for an event to occur X ms after the user finishes typing
+var searchTimer
+var searchTimerTimeout = 1000
 
 class NewNote extends Component {
   constructor(props) {
@@ -16,7 +19,7 @@ class NewNote extends Component {
 
   componentWillMount() {
     this.setState({
-      name: 'Max',
+      name: '',
       note: '',
       candidateOptions: [],
       selectedAction: [],
@@ -24,6 +27,7 @@ class NewNote extends Component {
       actions: [],
       candidateId: null,
       loaded: false,
+      noResults: true,
     })
   }
 
@@ -42,8 +46,14 @@ class NewNote extends Component {
 
   searchCandidates = (input) => {
     if (input) {
+      console.log(`++ searching for: ${input}`)
       return API.searchCandidates({query: input}).then(data => {
         const candidateOptions = data.map(c => ({value: c.entityId, label: c.title}))
+        if (!candidateOptions) {
+          this.setState({noResults: true})
+        } {
+          this.setState({noResults: false})
+        }
         return {
           options: candidateOptions,
           complete: false
@@ -98,6 +108,19 @@ class NewNote extends Component {
     this.setState(update)
   }
 
+  onSearchInputChange = (inputVal) => {
+    clearTimeout(searchTimer)
+    var self = this
+    searchTimer = setTimeout(function() {
+      self.searchCandidates(inputVal).then((candidates) => {
+        console.log('++ updating candidate options')
+        self.setState({
+          candidateOptions: candidates.options
+        })
+      })
+    }, searchTimerTimeout)
+  }
+
   onNameChange = (val) => {
     let selectedNames= this.state.selectedNames
     if (Array.isArray(val)) {
@@ -123,7 +146,14 @@ class NewNote extends Component {
   }
 
   getNameOptions = (input) => {
-    return this.searchCandidates(input)
+    clearTimeout(searchTimer)
+    var self = this
+    var promise = new Promise(function(resolve, reject) {
+       searchTimer = setTimeout(function() {
+          resolve(self.searchCandidates(input))
+       }, searchTimerTimeout)
+     })
+    return promise
   }
 
   render = () => {
@@ -139,12 +169,13 @@ class NewNote extends Component {
               <label>Name</label>
               <Select.Async
                 name="name"
-                placeholder="Name"
-                value={this.state.selectedNames}
+                placeholder={'Search Name'}
+                value={!this.state.noResults ? this.state.selectedNames : 'No Results'}
                 onChange={this.onNameChange}
-                loadOptions={this.getNameOptions}
                 autoload={false}
+                loadOptions={this.getNameOptions}
                 clearable={false}
+                openOnFocus={true}
               />
             </fieldset>
             <fieldset>

@@ -65,7 +65,7 @@ class BullhornApi():
     def get_entity(self, entity_name, entity_id, args):
         """
         Use the following syntax to filter the to - many entities that are returned in a response.
-        All three parts of the syntax are optional.The where - filter is delimited by curly braces. 
+        All three parts of the syntax are optional.The where - filter is delimited by curly braces.
         fields = fieldName[count](sub - fields) {where - filter}
         """
         endpoint = 'entity/{}/{}'.format(entity_name, entity_id)
@@ -159,18 +159,22 @@ class BullhornApi():
         # return candidates
         return candidates
 
-    def search_candidates(self):
+    def search_candidates(self, input):
         """
-        
-        :return: 
+
+        :return:
         """
+        if '@' in input:
+            query = 'email:{}'.format(input)
+        else:
+            query = 'name:"{}"'.format(input)
         endpoint = 'search/Candidate'
         args = {
             # 'fields': 'firstName,lastName',
             'fields': '*',
             'showTotalMatched': True,
-            'count': 10,
-            'query': 'name:M*'
+            'count': 5,
+            'query': query
         }
         returned = self.req(endpoint=endpoint, args=args)
         candidates = []
@@ -182,21 +186,44 @@ class BullhornApi():
         """
         uses bullhorn fast-find for search
         and filter down to just candidates
-        :return: 
+        :return:
         """
         endpoint = 'find'
         args = {
-            'query': query
+            'query': query,
+            'countPerEntity': 5
         }
         returned = self.req(endpoint=endpoint, args=args)
         candidates = filter(lambda e: e.get('entityType') == 'Candidate', returned['data'])
-        return candidates
+        # look up more info for candidates
+        to_return = []
+        for candidate in candidates:
+            args = {
+                'fields': 'firstName,lastName,companyName,email'
+            }
+            c = self.get_entity(entity_name='Candidate', entity_id=candidate['entityId'], args=args)
+            if c.get('data'):
+                c = c['data']
+                c['entityId'] = candidate['entityId']
+                title = '{firstName} {lastName}'.format(
+                    firstName=c['firstName'],
+                    lastName=c['lastName'],
+                )
+                if c.get('email'):
+                    title += ' ({})'.format(c['email'])
+                if c.get('companyName'):
+                    title += ' | {}'.format(c['companyName'])
+                c['title'] = title
+                to_return.append(c)
+            else:
+                print '++ error: {}'.format(c)
+        return to_return
 
     def create_note(self, comments, action, candidate_id):
         """
-        creates a note with inputted fields 
+        creates a note with inputted fields
         :param comments: text of the note
-        :param action: coded string of type of note 
+        :param action: coded string of type of note
         :param personReference: Person with whom this Note is associated.
                 Included fields are:
                     id
@@ -229,8 +256,13 @@ if __name__ == '__main__':
         # bapi.get_candidate_notes(test_id)
         # notes = bapi.query_notes(test_id)
         # candidates = bapi.get_all_candidates()
-        # candidates = bapi.search_candidates()
-        # candidates = bapi.fast_find_candidates('Max Fowler')
+        # candidates = bapi.search_candidates('Max Fowl')
+        # candidates = bapi.search_candidates('maxhfowler@gmail.com')
+        candidates = bapi.fast_find_candidates('maxhfowler@gmail.com')
+        # print len(candidates)
+        for c in candidates:
+            print c['title']
+
         # notes = bapi.get_all_candidate_notes(test_id)
         #
         # note_args = {
@@ -244,5 +276,5 @@ if __name__ == '__main__':
         #
         # bapi.create_entity('Note', note_args)
 
-        note_id = bapi.create_note(action='Left Message', comments='this is a test note 2', candidate_id=test_id)
-        print ('++ created note: {}'.format(note_id))
+        # note_id = bapi.create_note(action='Left Message', comments='this is a test note 2', candidate_id=test_id)
+        # print ('++ created note: {}'.format(note_id))

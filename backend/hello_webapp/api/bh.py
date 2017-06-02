@@ -21,7 +21,7 @@ def get_bh_blueprint():
         data = json.loads(request.data) if request.data else {}
         bapi = BullhornApi()
 
-        query = data['query']
+        query = data['query'].strip()
         candidates = bapi.fast_find_candidates(query)
 
         response = jsonify({
