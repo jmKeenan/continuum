@@ -1,18 +1,19 @@
 """
-This file looks for an env.json file in the root of backend 
-which determines many configuration properties for the app, 
-such as which database to connect to, and supplying secrets. 
+This file looks for an env.json file in the root of backend
+which determines many configuration properties for the app,
+such as which database to connect to, and supplying secrets.
 
 Ansible ensures that prod and staging having a different env.json file to allow them to work differently.
 
-If you would like to locally simulate the environment of staging or prod, 
+If you would like to locally simulate the environment of staging or prod,
 you can set the environmental variable HELLO_FORCE_USE_ENVIRON
 This will cause hello_settings.py to look in a different location for env.json (see FORCE_ENVIRON below)
 
 Constants from this file can be freely imported from anywhere in the backend.
-This file should import from no other files in the project. 
+This file should import from no other files in the project.
 """
 import os, json
+import hello_config as hello_config
 
 
 # project path
@@ -75,4 +76,5 @@ if ENV_DICT.get('DEBUG_SQL'):
     logging.basicConfig()
     logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
 
-# temporary settings below
+# configs
+ENV_DICT['ALERT_EMAILS'] = hello_config.ALERT_EMAILS

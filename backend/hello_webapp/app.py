@@ -8,8 +8,9 @@ from hello_utilities.log_helper import _log, _capture_exception
 from hello_webapp.helper_routes import get_hello_helpers_blueprint
 from hello_webapp.api.auth import get_auth_blueprint
 from hello_webapp.api.bh import get_bh_blueprint
+from hello_webapp.api.webhook import get_webhook_blueprint
 from hello_webapp.flask_admin_routes import get_flask_admin
-from hello_webapp.extensions import db, basic_auth, sentry
+from hello_webapp.extensions import db, basic_auth, sentry, mail
 
 
 # create flask app
@@ -41,10 +42,24 @@ def create_app():
     admin = get_flask_admin()
     admin.init_app(app)
 
+    # initialize flask-mail
+    mail_keys = [
+        "MAIL_SERVER",
+        "MAIL_PORT",
+        "MAIL_USE_TLS",
+        "MAIL_USERNAME",
+        "MAIL_PASSWORD",
+        "MAIL_DEFAULT_SENDER"
+    ]
+    for key in mail_keys:
+        app.config[key] = ENV_DICT[key]
+    mail.init_app(app)
+
     # register blueprints
     app.register_blueprint(get_hello_helpers_blueprint())
     app.register_blueprint(get_auth_blueprint())
     app.register_blueprint(get_bh_blueprint())
+    app.register_blueprint(get_webhook_blueprint())
 
     # configure sentry
     if ENV_DICT.get('SENTRY_DSN'):

@@ -22,7 +22,7 @@ def send_password_reset(user):
         secret_link = 'http://localhost:8080/reset/{}/'.format(secret_string)
     # otherwise use the subdomain of the tenancy
     else:
-        secret_link = 'http://{}.successkit.io/reset/{}/'.format(user.tenancy, secret_string)
+        secret_link = 'http://{}.cpisearch.io/reset/{}/'.format(user.tenancy, secret_string)
 
     reset_link_object = PasswordResetLink(
         user_id=user.user_id,
@@ -32,7 +32,7 @@ def send_password_reset(user):
     db.session.add(reset_link_object)
     db.session.commit()
     send_email(
-        user=user,
+        to_email=user.email,
         subject='SuccessKit Password Reset',
         template_path='emails/password_reset_email.html',
         template_vars={

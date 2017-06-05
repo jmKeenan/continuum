@@ -140,4 +140,15 @@ staging_deploy.sh copies over frontend/build/staging and prod_deploy.sh copies o
 On the server, nginx passes any requests to any url behind /api to Flask,
 and serves all other requests from /srv/public directly (this is where the frontend bundle is copied to).
 
+## sending emails
+
+we use amazon SES email service to send emails. SES is currently in sandbox mode, meaning any email 
+address we send to needs to be verified through the SES console. 
+
+in the future, we could move SES out of sandbox mode to allow for sending to any email address: move SES email service out of sandbox mode so it can send to any email address: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/request-production-access.html
+
+
 ## Future
+
+
+

@@ -159,7 +159,7 @@ class BullhornApi():
         # return candidates
         return candidates
 
-    def search_candidates(self, input):
+    def search_candidates(self, input, fields='*'):
         """
 
         :return:
@@ -170,8 +170,7 @@ class BullhornApi():
             query = 'name:"{}"'.format(input)
         endpoint = 'search/Candidate'
         args = {
-            # 'fields': 'firstName,lastName',
-            'fields': '*',
+            'fields': fields,
             'showTotalMatched': True,
             'count': 5,
             'query': query

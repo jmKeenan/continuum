@@ -170,12 +170,13 @@ class NewNote extends Component {
               <Select.Async
                 name="name"
                 placeholder={'Search Name'}
-                value={!this.state.noResults ? this.state.selectedNames : 'No Results'}
+                value={this.state.selectedNames}
                 onChange={this.onNameChange}
                 autoload={false}
                 loadOptions={this.getNameOptions}
                 clearable={false}
                 openOnFocus={true}
+                noResultsText="No Results Found"
               />
             </fieldset>
             <fieldset>
