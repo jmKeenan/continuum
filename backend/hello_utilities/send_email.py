@@ -11,9 +11,6 @@ def send_email(to_email, subject, template_path, template_vars):
     # email address that emails will be sent from
     from_email = ENV_DICT['MAIL_DEFAULT_SENDER']
 
-    # log that we are sending an email
-    _log('++ sending email to: {}'.format(to_email))
-
     # render HTML from template
     page_html = render_template(template_path, **template_vars)
 

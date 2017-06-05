@@ -28,6 +28,13 @@ def get_webhook_blueprint():
         email_content = data['body_plain']
         subject = data['subject']
 
+        # log message
+        _log('++ received web hook with data. to_email: {to_email} | subject: {subject}'.format(
+            to_email=to_email,
+            subject=subject
+        ))
+
+        # attempt to create note
         bapi = BullhornApi()
 
         search_results = bapi.search_candidates(input=to_email, fields='email,id,firstName,lastName')
@@ -49,6 +56,7 @@ def get_webhook_blueprint():
                     return response
 
         # if we reached here, then a note was not created, and we should send an error email
+        _log('++ note creation failure for email sent to {}'.format(to_email))
         alert_emails = ENV_DICT['ALERT_EMAILS']
         for to_email in alert_emails:
             t_vars = {
