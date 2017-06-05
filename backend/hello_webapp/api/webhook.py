@@ -58,14 +58,14 @@ def get_webhook_blueprint():
         # if we reached here, then a note was not created, and we should send an error email
         _log('++ note creation failure for email sent to {}'.format(to_email))
         alert_emails = ENV_DICT['ALERT_EMAILS']
-        for to_email in alert_emails:
+        for alert_email in alert_emails:
             t_vars = {
                 'email_content': email_content,
                 'to_email': to_email,
                 'subject': subject,
             }
             send_email(
-                to_email=to_email,
+                to_email=alert_email,
                 subject='Note Creation Failure',
                 template_path='emails/alert_email.html',
                 template_vars=t_vars
