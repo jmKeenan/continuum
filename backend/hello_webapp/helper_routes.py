@@ -6,7 +6,7 @@ from flask import Blueprint
 from flask import jsonify
 from flask import render_template
 
-from hello_settings import TEMPLATE_DIR
+from hello_settings import TEMPLATE_DIR, ENV_DICT
 from hello_utilities.log_helper import _log
 from hello_utilities.create_test_object import get_test_objects, create_test_object
 from hello_utilities.send_email import send_test_email
@@ -39,7 +39,7 @@ def get_hello_helpers_blueprint():
         this helper page for testing if email sending is working
         """
         _log('++ sending test email')
-        send_test_email()
+        send_test_email(ENV_DICT['MAIL_DEFAULT_SENDER'])
         return 'email test'
 
     @hello_helpers.route('/api/test_db/')
