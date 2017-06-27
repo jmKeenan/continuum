@@ -17,7 +17,7 @@ class BullhornApi():
         self.session = get_session()
         self.retries = 0
 
-    def req(self, endpoint, args, method='GET', raw_args=None):
+    def req(self, endpoint, args, method='GET'):
 
         # construct base url
         base_url = '{base}{endpoint}'.format(
@@ -30,9 +30,6 @@ class BullhornApi():
             # add the rest token to the query string
             args['BhRestToken'] = self.session['BhRestToken']
             qstring = urllib.urlencode(args)
-            if raw_args:
-                for k, v in raw_args.items():
-                    qstring += '&{}={}'.format(k, v)
             url = '{base_url}?{qstring}'.format(
                 base_url=base_url,
                 qstring=qstring
