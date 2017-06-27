@@ -4,8 +4,10 @@ utils for querying bullhorn api
 import json
 import urllib
 import requests
+import time
 
 from hello_utilities.bullhorn.bullhorn_tokens import get_session
+from hello_utilities.log_helper import _log
 
 
 class BullhornApi():
@@ -42,6 +44,14 @@ class BullhornApi():
                 qstring=qstring
             )
             r = requests.put(url, json=args)
+        elif method == 'POST':
+            qstring_args = {'BhRestToken': self.session['BhRestToken']}
+            qstring = urllib.urlencode(qstring_args)
+            url = '{base_url}?{qstring}'.format(
+                base_url=base_url,
+                qstring=qstring
+            )
+            r = requests.post(url, json=args)
         else:
             raise Exception('++ not yet implemented')
 
@@ -70,6 +80,18 @@ class BullhornApi():
         """
         endpoint = 'entity/{}/{}'.format(entity_name, entity_id)
         returned = self.req(endpoint=endpoint, args=args)
+        return returned
+
+    def update_entity(self, entity_name, entity_id, args):
+        """
+        POST request is used to update entity (this is the strangest oddity of the BH api)
+        :param entity_name: string name of entity
+        :param args: dictionary of args
+        :param entity_id: bullhorn string of entity to update
+        :return: whatever is returned by bh
+        """
+        endpoint = 'entity/{}/{}'.format(entity_name, entity_id)
+        returned = self.req(endpoint=endpoint, args=args, method='POST')
         return returned
 
     def create_entity(self, entity_name, args):
@@ -159,6 +181,19 @@ class BullhornApi():
         # return candidates
         return candidates
 
+    def save_last_response(self, candidate_id):
+        """
+        updates the last_response_date field for the given candidate to the current time
+        :param candidate_id: string bullhorn id of candidate to update
+        :return:
+        """
+        args = {
+            'customDate3': int(time.time()) * 1000  # in java, times are measured in ms not seconds
+        }
+        # and update/put this candidate
+        returned = self.update_entity(entity_name='Candidate', entity_id=candidate_id, args=args)
+        return returned
+
     def search_candidates(self, input, fields='*'):
         """
 
@@ -180,6 +215,38 @@ class BullhornApi():
         candidates.extend(returned['data'])
         # return candidates
         return candidates
+
+    def query_corporate_user(self, username):
+        """
+        returns all users of bullhorn
+        :return: list of users
+        """
+        endpoint = 'query/CorporateUser'
+        args = {
+            'fields': '*',
+            'orderBy': 'username',
+            'count': '500',
+            'start': '0',
+            'where': "email='{}'".format(username)
+        }
+        returned = self.req(endpoint=endpoint, args=args)
+        return returned['data']
+
+    def get_all_corporate_user(self):
+        """
+        returns all users of bullhorn (who are enabled to login)
+        :return: list of users
+        """
+        endpoint = 'query/CorporateUser'
+        args = {
+            'fields': '*',
+            'orderBy': 'username',
+            'count': '500',
+            'start': '0',
+            'where': "enabled=true"
+        }
+        returned = self.req(endpoint=endpoint, args=args)
+        return returned['data']
 
     def fast_find_candidates(self, query):
         """
@@ -218,15 +285,13 @@ class BullhornApi():
                 print '++ error: {}'.format(c)
         return to_return
 
-    def create_note(self, comments, action, candidate_id):
+    def create_note(self, comments, action, candidate_id, author_email=None):
         """
         creates a note with inputted fields
         :param comments: text of the note
         :param action: coded string of type of note
-        :param personReference: Person with whom this Note is associated.
-                Included fields are:
-                    id
-                    _subtype
+        :param candidate_id: string bullhorn id of the candidate the note should be added to
+        :param author_email: string email address of the recruiter that should be listed as the author
         :return: note object
         """
         note_args = {
@@ -237,6 +302,17 @@ class BullhornApi():
                 'id': candidate_id
             }
         }
+        if author_email:
+            corp_users = self.query_corporate_user(author_email)
+            if corp_users:
+                corp_user = corp_users[0]
+                note_args['commentingPerson'] = {
+                    '_subtype': 'CorporateUser',
+                    'id': corp_user['id']
+                }
+            else:
+                _log('++ failed to find corporate user with email: {}'.format(author_email))
+
         returned = self.create_entity('Note', note_args)
         if returned['changeType'] == 'INSERT':
             return returned['changedEntityId']
@@ -251,18 +327,32 @@ if __name__ == '__main__':
         bapi = BullhornApi()
 
         test_id = 59632
+        test_id2 = 95576
         # bapi.get_candidate(test_id)
         # bapi.get_candidate_notes(test_id)
         # notes = bapi.query_notes(test_id)
         # candidates = bapi.get_all_candidates()
         # candidates = bapi.search_candidates('Max Fowl')
         # candidates = bapi.search_candidates('maxhfowler@gmail.com')
-        candidates = bapi.fast_find_candidates('maxhfowler@gmail.com')
-        # print len(candidates)
-        for c in candidates:
-            print c['title']
-
+        # candidates = bapi.fast_find_candidates('sonyakc.2007@gmail.com')
+        # # # print len(candidates)
+        # for c in candidates:
+        #     print c['entityId']
+        #     print c['title']
+        # #
         # notes = bapi.get_all_candidate_notes(test_id)
+
+        # users = bapi.get_all_corporate_user()
+        # for u in users:
+        #     print 'username: {}'.format(u['username'])
+        #     print 'email: {}'.format(u['email'])
+        #     print 'id: {}'.format(u['id'])
+        #     print '***********'
+
+        # u = bapi.query_corporate_user('jkeenan@cpi-search.com')
+        # # u = bapi.query_corporate_user('test')
+        # print u
+
         #
         # note_args = {
         #     'action': 'Left Message',
@@ -272,8 +362,18 @@ if __name__ == '__main__':
         #         'id': test_id
         #     }
         # }
-        #
+
         # bapi.create_entity('Note', note_args)
 
-        # note_id = bapi.create_note(action='Left Message', comments='this is a test note 2', candidate_id=test_id)
+        # c = bapi.get_candidate(candidate_id=test_id2, args={'fields': '*'})
+        # print c
+
+        bapi.save_last_response(candidate_id=test_id)
+        #
+        # note_id = bapi.create_note(
+        #     action='Left Message',
+        #     comments='this is a test note with author',
+        #     candidate_id=test_id,
+        #     author_email='jkeenan@cpi-search.com'
+        # )
         # print ('++ created note: {}'.format(note_id))

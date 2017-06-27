@@ -4,4 +4,6 @@
 
 2. codir; usenvm; ./backend/bash/run.sh
 
-http://localhost:8080/
+visit http://localhost:8082/
+
+3. lt --subdomain continuum --port 8082  (for exposing webhook)
