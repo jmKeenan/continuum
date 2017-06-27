@@ -234,7 +234,7 @@ class BullhornApi():
 
     def get_all_corporate_user(self):
         """
-        returns all users of bullhorn
+        returns all users of bullhorn (who are enabled to login)
         :return: list of users
         """
         endpoint = 'query/CorporateUser'
@@ -245,8 +245,6 @@ class BullhornApi():
             'start': '0',
             'where': "enabled=true"
         }
-        # / query / {entityName}?where = {query} & fields = {fieldList} & orderBy = {fieldList}
-        # & count = {count} & start = {start}
         returned = self.req(endpoint=endpoint, args=args)
         return returned['data']
 
