@@ -21,10 +21,10 @@ def truncate_email(email_content):
     found_reply = False
     for index in range(0, len(lines)):
         line = lines[index]
-        m = re.match('On.*at.* wrote:', line)
+        m = re.match('> On.*at.* wrote:', line)
         if m:
             test_line = lines[index + 2]
-            if test_line.startswith('>'):
+            if test_line.startswith('>>'):
                 _log('++ truncating email at line "{}"'.format(line))
                 keep_lines.append(line)
                 keep_lines.append('... truncated')
