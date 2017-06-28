@@ -39,7 +39,9 @@ def truncate_email(email_content):
 
     # if we didn't already truncate, then just truncate to first 500 characters
     if not found_reply:
-        to_return = to_return[:500]
+        if len(to_return) > 500:
+            to_return = to_return[:500]
+            to_return += '.... truncated'
 
     # return whatever we have
     return to_return
@@ -61,7 +63,7 @@ def get_webhook_blueprint():
 
         # should we save the date of last-response
         # whether this key is set in the header or not is configured within zapier for a particular email address
-        save_last_response = request.headers.get('LAST-RESPONSE', None) == 1
+        save_last_response = request.headers.get('LAST-RESPONSE', None) == '1'
 
         data = request.form
         to_email = data['raw__To_email']
