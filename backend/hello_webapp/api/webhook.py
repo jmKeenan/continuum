@@ -37,7 +37,7 @@ def truncate_email(email_content):
     # combine keep_lines
     to_return = '\n'.join(keep_lines)
 
-    # if we didn't already truncate, then just truncate to first 500 characters
+    # if we didn't already truncate, then just truncate to first 3000 characters
     if not found_reply:
         if len(to_return) > 3000:
             to_return = to_return[:3000]
