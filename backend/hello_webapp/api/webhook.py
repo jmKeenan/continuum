@@ -21,10 +21,10 @@ def truncate_email(email_content):
     found_reply = False
     for index in range(0, len(lines)):
         line = lines[index]
-        m = re.match('> On.*at.* wrote:', line)
+        m = re.match('>> On.*at.* wrote:', line)
         if m:
             test_line = lines[index + 2]
-            if test_line.startswith('>>'):
+            if test_line.startswith('>>>'):
                 _log('++ truncating email at line "{}"'.format(line))
                 keep_lines.append(line)
                 keep_lines.append('... truncated')
@@ -39,13 +39,12 @@ def truncate_email(email_content):
 
     # if we didn't already truncate, then just truncate to first 500 characters
     if not found_reply:
-        if len(to_return) > 500:
-            to_return = to_return[:500]
-            to_return += '.... truncated'
+        if len(to_return) > 3000:
+            to_return = to_return[:3000]
+            to_return += '.... truncated after 3000 char'
 
     # return whatever we have
     return to_return
-
 
 
 def get_webhook_blueprint():
